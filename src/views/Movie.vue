@@ -18,6 +18,7 @@
             <ul>
               <li><strong>Жанр: </strong><span v-for="genre in movie.genres" :key="genre.id"><a :href="`/genre/${genre.id}`">{{ genre.name }}</a>, </span></li>
               <li><strong>Длительность: </strong> {{ movie.runtime }} мин.</li>
+              <li><strong>Дата выпуска: </strong> {{ movie.release_date }}</li>
             </ul>
 
           </div>
@@ -81,4 +82,3 @@ export default {
   max-height: 90vh;
 }
 </style>
-
