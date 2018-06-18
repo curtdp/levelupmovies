@@ -14,11 +14,11 @@
 <script>
 import axios from "axios";
 import MovieCard from "./MovieCard.vue";
-import { Pagination } from 'vue-pagination-2';
+import { Pagination } from "vue-pagination-2";
 import config from "../config.js";
 
 export default {
-  props: ['genreId', 'page'],
+  props: ["genreId", "page"],
   data() {
     return {
       movies: null,
@@ -29,44 +29,58 @@ export default {
   },
   name: "MoviesOfGenre",
   created() {
-    this.fetchGenre()
+    this.fetchGenre();
     if (this.page) {
-      this.runPaginate(this.page)
+      this.runPaginate(this.page);
     } else {
       this.fetchData();
     }
   },
   methods: {
     fetchGenre() {
-      axios.get(`https://api.themoviedb.org/3/genre/movie/list?api_key=${config.api_key}&language=${config.lang}`)
-        .then((genres) => {
-          console.log(genres)
+      axios
+        .get(
+          `https://api.themoviedb.org/3/genre/movie/list?api_key=${
+            config.api_key
+          }&language=${config.lang}`
+        )
+        .then(genres => {
           let genresList = genres.data.genres;
-          console.log(genresList)
-          let currentGenreObj = genresList.find((genre) => {
-            console.log(this.genreId)
+          let currentGenreObj = genresList.find(genre => {
             return genre.id === +this.genreId;
-            console.log(this.genreId)
           });
-          console.log(currentGenreObj);
-          this.currentGenreName = currentGenreObj.name
-        })
+          this.currentGenreName = currentGenreObj.name;
+        });
     },
     fetchData() {
-      axios.get(`https://api.themoviedb.org/3/discover/movie?with_genres=${this.genreId}&sort_by=popularity.desc&api_key=${config.api_key}&language=${config.lang}`)
-        .then((movies) => {
+      axios
+        .get(
+          `https://api.themoviedb.org/3/discover/movie?with_genres=${
+            this.genreId
+          }&sort_by=popularity.desc&api_key=${config.api_key}&language=${
+            config.lang
+          }`
+        )
+        .then(movies => {
           this.movies = movies.data.results;
-          this.totalRecords = movies.data.total_results
+          this.totalRecords = movies.data.total_results;
 
           this.loaded = true;
-        })
+        });
     },
     runPaginate(page) {
-      this.$router.push({ path: `/genre/${this.genreId}/page/${page}` })
-      axios.get(`https://api.themoviedb.org/3/discover/movie?with_genres=${this.genreId}&sort_by=popularity.desc&api_key=${config.api_key}&language=${config.lang}&page=${page}`)
-        .then((movies) => {
+      this.$router.push({ path: `/genre/${this.genreId}/page/${page}` });
+      axios
+        .get(
+          `https://api.themoviedb.org/3/discover/movie?with_genres=${
+            this.genreId
+          }&sort_by=popularity.desc&api_key=${config.api_key}&language=${
+            config.lang
+          }&page=${page}`
+        )
+        .then(movies => {
           this.movies = movies.data.results;
-        })
+        });
     }
   },
   components: {
@@ -74,11 +88,11 @@ export default {
     Pagination
   },
   watch: {
-    '$route' (to, from) {
+    $route() {
       window.scroll({
         top: 0,
         left: 0,
-        behavior: 'smooth'
+        behavior: "smooth"
       });
     }
   }

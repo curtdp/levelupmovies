@@ -9,14 +9,15 @@ Vue.use(Router);
 
 export default new Router({
   mode: "history",
-  scrollBehavior (to, from, savedPosition) {
+  scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
-      return savedPosition
+      return savedPosition;
     } else {
-      return { x: 0, y: 0 }
+      return { x: 0, y: 0 };
     }
   },
-  routes: [{
+  routes: [
+    {
       path: "/",
       name: "Home",
       component: Home
@@ -34,7 +35,7 @@ export default new Router({
         {
           // при совпадении пути с шаблоном /user/:id/profile
           // в <router-view> компонента User будет показан UserProfile
-          path: 'page/:pageNumber',
+          path: "page/:pageNumber",
           component: Genre
         }
       ]

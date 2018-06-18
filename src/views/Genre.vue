@@ -3,15 +3,14 @@
 </template>
 
 <script>
-  import MoviesOfGenre from "@/components/MoviesOfGenre.vue";
-  export default {
-      name: "genre",
-      components: {
-        MoviesOfGenre
-      }
+import MoviesOfGenre from "@/components/MoviesOfGenre.vue";
+export default {
+  name: "genre",
+  components: {
+    MoviesOfGenre
   }
+};
 </script>
 
 <style scoped>
-
 </style>
