@@ -12,6 +12,9 @@ export default {
   name: "home",
   components: {
     MoviesList
+  },
+  created() {
+    document.title = "Главная - LeveUp Movies";
   }
 };
 </script>

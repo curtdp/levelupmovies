@@ -57,6 +57,7 @@ export default {
           .then(response => {
             this.movie = response.data;
             console.log(this.movie);
+            document.title = this.movie.title + " - LeveUp Movies";
           });
       } catch (e) {
         console.error(e);
