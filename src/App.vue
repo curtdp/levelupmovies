@@ -1,13 +1,29 @@
 <template>
   <div id="app">
-    <div id="nav" class="bg-white shadow-lg p-4 mb-4">
+    <div id="head-panel" class="bg-white shadow-lg p-4 mb-4">
       <h1>LevelUp MoviesDB</h1>
-      <router-link to="/">Главная</router-link> |
-      <router-link to="/about">О сайте</router-link>
+
+      <nav class="flex items-center flex-wrap">
+        <div class="links">
+          <router-link to="/">Главная</router-link> |
+          <router-link to="/about">О сайте</router-link>
+        </div>
+        <search-form class="ml-auto"></search-form>
+      </nav>
     </div>
     <router-view/>
   </div>
 </template>
+
+<script>
+import SearchForm from './components/SearchForm.vue'
+export default {
+  components: {
+    SearchForm
+  }
+}
+</script>
+
 
 <style src="./assets/styles/main.css">
 </style>
