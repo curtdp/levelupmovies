@@ -71,7 +71,11 @@ export default {
     backdropPath() {
       return `${BACKDROP_PATH}${this.movie.backdrop_path}`;
     }
-  }
+  },
+  watch: {
+    // при изменениях маршрута запрашиваем данные снова
+    '$route': 'fetchData'
+  },
 };
 </script>
 
