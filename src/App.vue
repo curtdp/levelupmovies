@@ -12,6 +12,11 @@
       </nav>
     </div>
     <router-view/>
+    <footer class="bg-white mt-8 shadow-inner">
+      <div class="container mx-auto p-8">
+      &copy; 2018 г.
+      </div>
+    </footer>
   </div>
 </template>
 

@@ -1,8 +1,11 @@
 <template>
   <div v-if="movie">
-    <div :style="{backgroundImage: `url(${backdropPath})`}" class="backdrop w-full mb-4 shadow-md bg-no-repeat bg-cover bg-center text-white flex flex-col items-center justify-center">
-      <h1 class="mb-2 text-center md:text-5xl">{{ movie.title }}</h1>
-      <div class="md:text-3xl">{{ movie.tagline }}</div>
+    <div class="backdrop-container w-full mb-4 shadow-md text-white flex flex-col items-center justify-center relative overflow-hidden">
+      <div class="backdrop w-full h-full bg-no-repeat bg-cover bg-center absolute" :style="{backgroundImage: `url(${backdropPath})`}"></div>
+      <div class="z-0">
+        <h1 class="mb-2 text-center md:text-5xl">{{ movie.title }}</h1>
+        <div class="md:text-3xl">{{ movie.tagline }}</div>
+      </div>
     </div>
     <div class="container mx-auto px-4">
     <div class="flex flex-wrap -mx-2">
@@ -80,6 +83,9 @@ export default {
 </script>
 
 <style scoped>
+.backdrop-container {
+  height: 60vw;
+}
 .backdrop {
   text-shadow: 5px 2px 8px rgba(0, 0, 0, 0.8);
   filter: brightness(0.9);
