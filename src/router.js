@@ -4,6 +4,7 @@ import About from "./views/About.vue";
 import Home from "./views/Home.vue";
 import Movie from "./views/Movie.vue";
 import Genre from "./views/Genre.vue";
+import SearchResults from "./views/SearchResults.vue";
 
 Vue.use(Router);
 
@@ -26,6 +27,11 @@ export default new Router({
       path: "/movie/:id",
       name: "Movie Detail",
       component: Movie
+    },
+    {
+      path: "/search/:query",
+      name: "Search Results",
+      component: SearchResults
     },
     {
       path: "/genre/:genreId",
