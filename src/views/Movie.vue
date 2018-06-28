@@ -2,7 +2,7 @@
   <div v-if="movie">
     <div class="backdrop-container w-full mb-4 shadow-md text-white flex flex-col items-center justify-center relative overflow-hidden">
       <div class="backdrop w-full h-full bg-no-repeat bg-cover bg-center absolute" :style="{backgroundImage: `url(${backdropPath})`}"></div>
-      <div class="z-0">
+      <div class="z-0 movieTitle">
         <h1 class="mb-2 text-center md:text-5xl">{{ movie.title }}</h1>
         <div class="md:text-3xl">{{ movie.tagline }}</div>
       </div>
@@ -103,6 +103,9 @@ export default {
 </script>
 
 <style scoped>
+.movieTitle {
+  text-shadow: 4px 2px 6px rgba(36, 36, 36, 0.75);
+}
 .videoPlayerContainer {
   width: 100%;
   padding-top: 56.25%;
@@ -114,12 +117,13 @@ export default {
   left: 0;
   bottom: 0;
   right: 0;
+  width: 100%;
+  height: 100%;
 }
 .backdrop-container {
   height: 60vw;
 }
 .backdrop {
-  text-shadow: 5px 2px 8px rgba(0, 0, 0, 0.8);
   filter: brightness(0.9);
   height: 60vw;
   max-height: 90vh;
