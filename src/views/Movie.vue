@@ -24,8 +24,8 @@
               <li><strong>Дата выпуска: </strong> {{ movie.release_date }}</li>
             </ul>
             <div v-if="movieVideos">
-              <div v-for="trailer in movieVideos" :key="trailer.key">
-                <iframe class="w-full h-64" :src="`https://www.youtube.com/embed/${trailer.key}`" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+              <div class="videoPlayerContainer my-2" v-for="trailer in movieVideos" :key="trailer.key">
+                <iframe class="videoPlayer" :src="`https://www.youtube.com/embed/${trailer.key}`" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
               </div>
             </div>
             <p v-else>Загрузка...</p>
@@ -103,6 +103,18 @@ export default {
 </script>
 
 <style scoped>
+.videoPlayerContainer {
+  width: 100%;
+  padding-top: 56.25%;
+  position: relative;
+}
+.videoPlayer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
 .backdrop-container {
   height: 60vw;
 }
