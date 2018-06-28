@@ -2,6 +2,7 @@
   <div class="relative">
     <label class="form-label" for="search-form">Поиск</label>
     <input
+      autocomplete="off"
       v-model="searchQuery"
       @keydown.esc="close"
       @keydown.down="highlightNext"
