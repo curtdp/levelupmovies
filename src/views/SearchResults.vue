@@ -5,7 +5,7 @@
 <script>
 import SearchQuery from "@/components/SearchQuery.vue";
 export default {
-  name: "genre",
+  name: "search-results",
   components: {
     SearchQuery
   }

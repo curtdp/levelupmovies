@@ -31,7 +31,15 @@ export default new Router({
     {
       path: "/search/:query",
       name: "Search Results",
-      component: SearchResults
+      component: SearchResults,
+      children: [
+        {
+          // при совпадении пути с шаблоном /user/:id/profile
+          // в <router-view> компонента User будет показан UserProfile
+          path: "page/:pageNumber",
+          component: SearchResults
+        }
+      ]
     },
     {
       path: "/genre/:genreId",
@@ -46,11 +54,6 @@ export default new Router({
         }
       ]
     },
-    // {
-    //   path: "/genre/:genreId/page/:pageNumber",
-    //   name: "Genre",
-    //   component: Genre
-    // },
     {
       path: "/about",
       name: "about",

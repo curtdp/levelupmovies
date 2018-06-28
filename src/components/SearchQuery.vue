@@ -27,7 +27,7 @@ export default {
       totalRecords: 500
     };
   },
-  name: "MoviesOfGenre",
+  name: "SearchQuery",
   created() {
     this.fetchData();
     if (this.page) {
@@ -52,14 +52,12 @@ export default {
         });
     },
     runPaginate(page) {
-      this.$router.push({ path: `/genre/${this.genreId}/page/${page}` });
+      this.$router.push({ path: `/search/${this.query}/page/${page}` });
       axios
         .get(
-          `https://api.themoviedb.org/3/discover/movie?with_genres=${
-            this.genreId
-          }&sort_by=popularity.desc&api_key=${config.api_key}&language=${
+          `https://api.themoviedb.org/3/search/movie?api_key=${config.api_key}&language=${
             config.lang
-          }&page=${page}`
+          }&page=${page}&query=${this.query}`
         )
         .then(movies => {
           this.movies = movies.data.results;
@@ -72,7 +70,7 @@ export default {
   },
   watch: {
     query() {
-      this.fetchData();
+      this.fetchData()
     },
     $route() {
       window.scroll({

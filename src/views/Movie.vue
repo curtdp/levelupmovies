@@ -23,7 +23,12 @@
               <li><strong>Длительность: </strong> {{ movie.runtime }} мин.</li>
               <li><strong>Дата выпуска: </strong> {{ movie.release_date }}</li>
             </ul>
-
+            <div v-if="movieVideos">
+              <div v-for="trailer in movieVideos" :key="trailer.key">
+                <iframe class="w-full h-64" :src="`https://www.youtube.com/embed/${trailer.key}`" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+              </div>
+            </div>
+            <p v-else>Загрузка...</p>
           </div>
         </div>
       </div>
@@ -42,7 +47,9 @@ const BACKDROP_PATH = `${config.images.base_url}w780`;
 export default {
   data() {
     return {
-      movie: null
+      movie: null,
+      movieVideos: null
+
     };
   },
   created() {
@@ -51,6 +58,7 @@ export default {
   methods: {
     fetchData: async function() {
       try {
+        // Get movie data
         axios
           .get(
             `https://api.themoviedb.org/3/movie/${
@@ -62,6 +70,18 @@ export default {
             console.log(this.movie);
             document.title = this.movie.title + " - LeveUp Movies";
           });
+        // Get movie videos
+        axios
+          .get(
+            `https://api.themoviedb.org/3/movie/${
+              this.$route.params.id
+            }/videos?api_key=${config.api_key}&language=${config.lang}`
+          )
+          .then(response => {
+            this.movieVideos = response.data.results;
+            console.log(this.movie);
+          });
+
       } catch (e) {
         console.error(e);
       }
