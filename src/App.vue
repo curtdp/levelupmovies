@@ -8,10 +8,16 @@
           <router-link to="/">Главная</router-link> |
           <router-link to="/about">О сайте</router-link>
         </div>
-        <search-form class="ml-auto"></search-form>
+        <div>
+          <button @click="changeLang('ru-ru')" :class="{'is-active': lang === 'ru-ru'}" class="py-1 px-2 mx-1 border border-blue text-blue-darker rounded">RU</button>
+          <button @click="changeLang('en-en')" :class="{'is-active': lang === 'en-en'}" class="py-1 px-2 mx-1 border border-blue text-blue-darker rounded">EN</button>
+        </div>
+        <search-form class="ml-auto" :lang="lang"></search-form>
       </nav>
     </div>
-    <router-view/>
+    <transition name="fade" mode="out-in">
+      <router-view :lang="lang"/>
+    </transition>
     <footer class="bg-white mt-8 shadow-inner">
       <div class="container mx-auto p-8">
       &copy; 2018 г.
@@ -23,8 +29,22 @@
 <script>
 import SearchForm from './components/SearchForm.vue'
 export default {
+  created() {
+    this.lang = localStorage.getItem('lang');
+  },
+  data() {
+    return {
+      lang: 'en-en'
+    }
+  },
   components: {
     SearchForm
+  },
+  methods: {
+    changeLang(lang) {
+      this.lang = lang;
+      localStorage.setItem('lang', lang);
+    }
   }
 }
 </script>
@@ -34,6 +54,20 @@ export default {
 </style>
 
 <style>
+.is-active {
+  background-color: #3490dc69;
+}
+.fade-enter, .fade-leave-to {
+  transform: translateX(10px);
+  opacity: 0;
+}
+.fade-enter-to {
+  opacity: 1;
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 2s, transform 1s;
+}
+
 .pagination {
   display: flex;
 }

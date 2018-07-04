@@ -18,7 +18,7 @@ import { Pagination } from "vue-pagination-2";
 import config from "../config.js";
 
 export default {
-  props: ["query", "page"],
+  props: ["query", "page", "lang"],
   data() {
     return {
       movies: null,
@@ -41,7 +41,7 @@ export default {
       axios
         .get(
           `https://api.themoviedb.org/3/search/movie?api_key=${config.api_key}&language=${
-            config.lang
+            this.lang
           }&query=${this.query}`
         )
         .then(movies => {
@@ -56,7 +56,7 @@ export default {
       axios
         .get(
           `https://api.themoviedb.org/3/search/movie?api_key=${config.api_key}&language=${
-            config.lang
+            this.lang
           }&page=${page}&query=${this.query}`
         )
         .then(movies => {

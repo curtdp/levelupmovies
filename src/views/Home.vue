@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <MoviesList />
+    <MoviesList :lang="lang" />
   </div>
 </template>
 
@@ -9,6 +9,7 @@
 import MoviesList from "@/components/MoviesList.vue";
 
 export default {
+  props: ['lang'],
   name: "home",
   components: {
     MoviesList

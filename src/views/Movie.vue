@@ -19,7 +19,12 @@
               {{ movie.overview }}
             </p>
             <ul>
-              <li><strong>Жанр: </strong><span v-for="genre in movie.genres" :key="genre.id"><a :href="`/genre/${genre.id}`">{{ genre.name }}</a>, </span></li>
+              <li><strong>Жанр: </strong>
+                <span v-for="genre in movie.genres" :key="genre.id">
+                  <a :href="`/genre/${genre.id}`">{{ genre.name }}</a>,
+                  <!-- <router-link to="`/genre/${genre.id}`">{{ genre.name }}</router-link> -->
+                </span>
+              </li>
               <li><strong>Длительность: </strong> {{ movie.runtime }} мин.</li>
               <li><strong>Дата выпуска: </strong> {{ movie.release_date }}</li>
             </ul>
@@ -45,6 +50,7 @@ const POSTER_PATH = `${config.images.base_url}w342`;
 const BACKDROP_PATH = `${config.images.base_url}w780`;
 
 export default {
+  props: ['lang'],
   data() {
     return {
       movie: null,
@@ -63,7 +69,7 @@ export default {
           .get(
             `https://api.themoviedb.org/3/movie/${
               this.$route.params.id
-            }?api_key=${config.api_key}&language=${config.lang}`
+            }?api_key=${config.api_key}&language=${this.lang}`
           )
           .then(response => {
             this.movie = response.data;
@@ -75,7 +81,7 @@ export default {
           .get(
             `https://api.themoviedb.org/3/movie/${
               this.$route.params.id
-            }/videos?api_key=${config.api_key}&language=${config.lang}`
+            }/videos?api_key=${config.api_key}&language=${this.lang}`
           )
           .then(response => {
             this.movieVideos = response.data.results;
@@ -97,7 +103,8 @@ export default {
   },
   watch: {
     // при изменениях маршрута запрашиваем данные снова
-    '$route': 'fetchData'
+    '$route': 'fetchData',
+    lang: 'fetchData'
   },
 };
 </script>

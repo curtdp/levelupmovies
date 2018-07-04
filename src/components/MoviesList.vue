@@ -15,6 +15,7 @@ import MovieCard from "./MovieCard.vue";
 import config from "../config.js";
 
 export default {
+  props: ['lang'],
   data() {
     return {
       movies: null
@@ -30,7 +31,7 @@ export default {
         .get(
           `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=${
             config.api_key
-          }&language=${config.lang}`
+          }&language=${this.lang}`
         )
         .then(response => {
           this.movies = response.data.results;
@@ -39,6 +40,9 @@ export default {
   },
   components: {
     MovieCard
+  },
+  watch: {
+    lang: 'fetchData'
   }
 };
 </script>

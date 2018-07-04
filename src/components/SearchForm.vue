@@ -13,6 +13,7 @@
       >
     <div class="absolute bg-grey rounded overflow-hidden w-full mt-1 p-2 list-reset shadow-md z-10 flex flex-col"
       v-show="results.length > 0">
+      <transition-group name="fade" tag="p">
         <router-link
           class="p-2 hover:bg-white rounded"
           v-for="(result, i) of results" :key="result.id"
@@ -21,6 +22,7 @@
           tag="button">
         {{ result.title }}
         </router-link>
+      </transition-group>
     </div>
   </div>
 </template>
@@ -32,6 +34,7 @@ import debounce from "lodash.debounce";
 import take from "lodash.take";
 
 export default {
+  props: ['lang'],
   data() {
     return {
       searchQuery: "",
@@ -47,7 +50,7 @@ export default {
             .get(
               `https://api.themoviedb.org/3/search/movie?api_key=${
                 config.api_key
-              }&language=${config.lang}&query=${this.searchQuery}`
+              }&language=${this.lang}&query=${this.searchQuery}`
             )
             .then(response => {
               this.highlightedIndex = null;
@@ -121,5 +124,11 @@ export default {
 }
 .is-active {
   background-color: white;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+.fade-active, .fade-leave {
+  transition: opacity 500ms;
 }
 </style>
